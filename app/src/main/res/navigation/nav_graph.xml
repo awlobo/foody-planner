@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/PlannerFragment">
+
+    <fragment
+        android:id="@+id/PlannerFragment"
+        android:name="com.awlobo.foodyplanner.PlannerFragment"
+        android:label="@string/planning_fragment_label"
+        tools:layout="@layout/planner_fragment">
+
+
+    </fragment>
+
+</navigation>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2">
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Comidas"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Cenas"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="L"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="24sp"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/item11"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item11"
+            android:text="HOLA"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item12"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item12" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="M"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item21"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item21" />
+
+        <TextView
+            android:id="@+id/item22"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item22" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="X"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item31"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item31" />
+
+        <TextView
+            android:id="@+id/item32"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item32" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="J"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item41"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item41" />
+
+        <TextView
+            android:id="@+id/item42"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item42" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="V"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item51"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item51" />
+
+        <TextView
+            android:id="@+id/item52"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item52" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="S"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item61"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item61" />
+
+        <TextView
+            android:id="@+id/item62"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item62" />
+    </TableRow>
+
+    <TableRow
+        android:background="#DAE8FC"
+        android:minHeight="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="D"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/item71"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:tag="item71" />
+
+        <TextView
+            android:id="@+id/item72"
+            style="@style/itemsTable"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:tag="item72" />
+    </TableRow>
+
+
+</TableLayout>
