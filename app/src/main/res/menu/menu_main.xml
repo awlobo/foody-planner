@@ -3,8 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.awlobo.foodyplanner.MainActivity">
     <item
+        android:id="@+id/action_add_food"
+        android:orderInCategory="100"
+        android:title="@string/add_food"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_clear_table"
+        android:orderInCategory="100"
+        android:title="@string/clear_table"
         app:showAsAction="never" />
 </menu>

@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="none">
 
-    <include
-        android:id="@+id/table"
-        layout="@layout/table_days" />
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/rgComidas"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="match_parent">
+        <include
+            android:id="@+id/table"
+            layout="@layout/table_days" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/tag1"
-            android:layout_margin="3dp"
-            android:layout_width="wrap_content"
+        <!--    <RadioGroup-->
+        <!--        android:id="@+id/rgComidas"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:orientation="horizontal"-->
+        <!--        app:chipSpacingVertical="2dp"-->
+        <!--        android:layout_height="match_parent">-->
+
+        <!--        <com.google.android.material.chip.Chip-->
+        <!--            android:id="@+id/tag1"-->
+        <!--            android:layout_margin="3dp"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:backgroundTint="@color/colorPrimaryLight"-->
+        <!--            android:fontFamily="sans-serif-smallcaps"-->
+        <!--            android:text="hola mis panas" />-->
+        <!--        <com.google.android.material.chip.Chip-->
+        <!--            android:id="@+id/tag2"-->
+        <!--            android:layout_margin="3dp"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:backgroundTint="@color/colorPrimaryLight"-->
+        <!--            android:fontFamily="sans-serif-smallcaps"-->
+        <!--            android:text="hola mis panas v2" />-->
+        <!--    </RadioGroup>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComidas"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryLight"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="hola mis panas" />
-        <com.google.android.material.chip.Chip
-            android:id="@+id/tag2"
-            android:layout_margin="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryLight"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="hola mis panas v2" />
-    </RadioGroup>
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            tools:listitem="@layout/item_food" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

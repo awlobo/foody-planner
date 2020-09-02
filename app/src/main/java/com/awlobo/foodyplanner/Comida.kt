@@ -1,3 +1,5 @@
 package com.awlobo.foodyplanner
 
-class Comida(val nombre: String = "")
+data class Comida(
+    val nombre: String = ""
+)

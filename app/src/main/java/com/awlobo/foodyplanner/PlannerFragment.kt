@@ -11,18 +11,31 @@ import android.view.View
 import android.view.View.DragShadowBuilder
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.chip.Chip
+import androidx.fragment.app.activityViewModels
+import com.awlobo.foodyplanner.core.FirestoreHelper
+import com.awlobo.foodyplanner.core.Planning
+import com.awlobo.foodyplanner.core.setBaseAdapter
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
+import kotlinx.android.synthetic.main.item_food.view.*
 import kotlinx.android.synthetic.main.planner_fragment.*
-import kotlinx.android.synthetic.main.planner_fragment.view.*
-import kotlinx.android.synthetic.main.table_days.view.*
+import kotlin.math.roundToInt
 
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListener {
+
+    private val viewModel: SharedViewModel by activityViewModels()
+
+    var foodList = mutableListOf<Comida>()
+    val planning = Planning("plan1")
+
+    private var mScrollDistance = 0
+    lateinit var tableItems: ArrayList<View>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,20 +44,95 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
         return inflater.inflate(R.layout.planner_fragment, container, false)
     }
 
+    override fun onStop() {
+        savePlanning()
+        super.onStop()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: 1/09/20 cargar lista con chips, cuando dole click recuperar chip, comparar tag? 
         val tableLayout = table as ViewGroup
+        tableItems = getViewsByTag(tableLayout, "item")
+        tableItems.forEach {
+            it.setOnDragListener(this)
+            (it as TextView).freezesText = true
+        }
 
-        val items = getViewsByTag(tableLayout, "item")
-        items?.forEach { it.setOnDragListener(this) }
+        viewModel.foodListLiveData.observe(viewLifecycleOwner, {
+            foodList.clear()
+            foodList.addAll(it)
+            rvComidas.adapter?.notifyDataSetChanged()
+        })
 
-        tag1.tag = tag1.text
-        tag2.tag = tag2.text
-        tag1.setOnLongClickListener(this)
-        tag2.setOnLongClickListener(this)
+        scroll_view.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            mScrollDistance = scrollY
+        }
 
+        viewModel.deleteData.observe(viewLifecycleOwner, {
+            if (it) {
+                viewModel.deleteData.value = false
+                tableItems.forEach { view ->
+                    (view as TextView).text = ""
+                }
+            }
+        })
+
+//        foodList.addAll(
+//            mutableListOf(
+//                Comida("Tortilla"),
+//                Comida("Macarrones"),
+//                Comida("Pizza"),
+//                Comida("Hamburguesa"),
+//                Comida("Burritos"),
+//                Comida("Salmón")
+//            )
+//        )
+
+        viewModel.planningLiveData.observe(viewLifecycleOwner, {
+            for (i in 0..13) {
+                (tableItems[i] as TextView).text = it[i]?.nombre ?: ""
+            }
+//
+//            temp.forEach { (key, value) ->
+//                val k = key.split("_")[0].toInt()
+//                if( (tableItems[k] as TextView).text != value.nombre){
+//                (tableItems[k] as TextView).text = value.nombre}
+//            }
+        })
+
+        viewModel.newFoodLiveData.observe(viewLifecycleOwner, {
+            if (it.nombre.isNotEmpty()) {
+                foodList.add(it)
+                FirestoreHelper().addFood(it)
+//                rvComidas.adapter?.notifyItemChanged(foodList.size - 1)
+            }
+        })
+
+
+        rvComidas.setBaseAdapter(foodList, R.layout.item_food) {
+            itemView.tvFoodName.text = it.nombre
+            itemView.tvFoodName.tag = itemView.tvFoodName.text
+            itemView.tvFoodName.setOnLongClickListener(this@PlannerFragment)
+        }
+
+        val layoutManager = FlexboxLayoutManager(context)
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.justifyContent = JustifyContent.CENTER
+        rvComidas.layoutManager = layoutManager
+
+    }
+
+    private fun savePlanning() {
+        tableItems.forEachIndexed { index, view ->
+            val key = "${index}_"
+            val tempFood = Comida((view as TextView).text.toString())
+            if ( (!planning.foodList.containsKey(key) || planning.foodList[key] != tempFood)
+            ) {
+                planning.foodList[key] = tempFood
+                FirestoreHelper().addPlanning(planning)
+            }
+        }
     }
 
     override fun onDrag(v: View?, event: DragEvent): Boolean {
@@ -64,8 +152,25 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
                 v.invalidate()
                 return true
             }
-            DragEvent.ACTION_DRAG_LOCATION ->                 // Ignore the event
+            DragEvent.ACTION_DRAG_LOCATION -> {
+
+                val y = event.y.roundToInt()
+                val translatedY = y - mScrollDistance
+                val threshold = 50
+                // make a scrolling up due the y has passed the threshold
+                if (translatedY < threshold) {
+                    // make a scroll up by 30 px
+                    scroll_view.scrollBy(0, -30)
+                }
+                // make a autoscrolling down due y has passed the 500 px border
+                if (translatedY + threshold > 500) {
+                    // make a scroll down by 30 px
+                    scroll_view.scrollBy(0, 30)
+                }
+
                 return true
+            }
+
             DragEvent.ACTION_DRAG_EXITED -> {
                 // Re-sets the color tint to blue. Returns true; the return value is ignored.
                 // view.getBackground().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
@@ -81,41 +186,26 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
                 val item = event.clipData.getItemAt(0)
                 // Gets the text data from the item.
                 val dragData = item.text.toString()
-                // Displays a message containing the dragged data.
-                Toast.makeText(requireContext(), "Dragged data is $dragData", Toast.LENGTH_SHORT)
-                    .show()
                 // Turns off any color tints
                 v!!.setBackgroundColor(Color.TRANSPARENT)
                 // Invalidates the view to force a redraw
                 v.invalidate()
-                val vw = event.localState as Chip
+                val vw = event.localState as TextView
                 val owner = vw.parent as ViewGroup
                 owner.removeView(vw) //remove the dragged view
                 //caste the view into LinearLayout as our drag acceptable layout is LinearLayout
                 val container = v as TextView
-                container.text = vw.text //Add the dragged view
-                vw.visibility = View.GONE //finally set Visibility to VISIBLE
+                container.text = dragData //Add the dragged view
+//                savePlanning()
+
+//                vw.visibility = View.GONE //finally set Visibility to VISIBLE
                 // Returns true. DragEvent.getResult() will return true.
                 return true
             }
             DragEvent.ACTION_DRAG_ENDED -> {
-                // Turns off any color tinting
                 v!!.setBackgroundColor(Color.TRANSPARENT)
-//                v!!.background.clearColorFilter()
-                // Invalidates the view to force a redraw
                 v.invalidate()
-                // Does a getResult(), and displays what happened.
-                if (event.result) Toast.makeText(
-                    requireContext(),
-                    "The drop was handled.",
-                    Toast.LENGTH_SHORT
-                ).show() else Toast.makeText(
-                    requireContext(),
-                    "The drop didn't work.",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-                // returns true; the value is ignored.
+                // if (!event.result)
                 return true
             }
             else -> Log.e("DragDrop Example", "Unknown action type received by OnDragListener.")
@@ -134,25 +224,25 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
         val data = ClipData(v.tag.toString(), mimeTypes, item)
 
         // Instantiates the drag shadow builder.
-        val dragshadow = DragShadowBuilder(v)
+        val dragShadow = DragShadowBuilder(v)
 
         // Starts the drag
         v.startDragAndDrop(
             data // data to be dragged
-            , dragshadow // drag shadow
+            , dragShadow // drag shadow
             , v // local data about the drag and drop operation
             , 0 // flags set to 0 because not using currently
         )
         return true
     }
 
-    private fun getViewsByTag(root: ViewGroup, tag: String): ArrayList<View>? {
+    private fun getViewsByTag(root: ViewGroup, tag: String): ArrayList<View> {
         val views = ArrayList<View>()
         val childCount = root.childCount
         for (i in 0 until childCount) {
             val child = root.getChildAt(i)
             if (child is ViewGroup) {
-                views.addAll(getViewsByTag(child, tag)!!)
+                views.addAll(getViewsByTag(child, tag))
             }
             val tagObj = child.tag
             if (tagObj != null && tagObj.toString().contains(tag)) {
@@ -161,6 +251,4 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
         }
         return views
     }
-
-
 }
