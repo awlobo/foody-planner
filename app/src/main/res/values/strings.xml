@@ -5,5 +5,6 @@
     <string name="planning_fragment_label" translatable="false">Planning</string>
     <string name="add_food">Add food</string>
     <string name="clear_table">Clear table</string>
+    <string name="share_screenshot">Share planning</string>
 
 </resources>

@@ -1,9 +1,9 @@
 package com.awlobo.foodyplanner.core
 
 import android.util.Log
-import com.awlobo.foodyplanner.Comida
+import com.awlobo.foodyplanner.domain.Food
+import com.awlobo.foodyplanner.domain.Planning
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
@@ -11,11 +11,11 @@ class FirestoreHelper() {
 
     var db = FirebaseFirestore.getInstance()
 
-    fun addFood(data: Comida) {
+    fun addFood(data: Food) {
         db.collection("myApps")
             .document("FoodyPlanner")
             .collection("Foods")
-            .document(data.nombre)
+            .document(data.name)
             .set(data, SetOptions.merge())
             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }

@@ -14,8 +14,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.awlobo.foodyplanner.core.FirestoreHelper
-import com.awlobo.foodyplanner.core.Planning
+import com.awlobo.foodyplanner.domain.Planning
 import com.awlobo.foodyplanner.core.setBaseAdapter
+import com.awlobo.foodyplanner.domain.Food
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -31,8 +32,8 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
 
     private val viewModel: SharedViewModel by activityViewModels()
 
-    var foodList = mutableListOf<Comida>()
-    val planning = Planning("plan1")
+    var foodList = mutableListOf<Food>()
+    val planning = Planning()
 
     private var mScrollDistance = 0
     lateinit var tableItems: ArrayList<View>
@@ -59,15 +60,21 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
             (it as TextView).freezesText = true
         }
 
-        viewModel.foodListLiveData.observe(viewLifecycleOwner, {
+//        viewModel.foodListLiveData.observe(viewLifecycleOwner, {
+//            foodList.clear()
+//            foodList.addAll(it)
+//            rvComidas.adapter?.notifyDataSetChanged()
+//        })
+
+        scroll_view.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            mScrollDistance = scrollY
+        }
+
+        viewModel.foodList?.observe(viewLifecycleOwner,{
             foodList.clear()
             foodList.addAll(it)
             rvComidas.adapter?.notifyDataSetChanged()
         })
-
-        scroll_view.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            mScrollDistance = scrollY
-        }
 
         viewModel.deleteData.observe(viewLifecycleOwner, {
             if (it) {
@@ -91,7 +98,7 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
 
         viewModel.planningLiveData.observe(viewLifecycleOwner, {
             for (i in 0..13) {
-                (tableItems[i] as TextView).text = it[i]?.nombre ?: ""
+                (tableItems[i] as TextView).text = it[i]?.name ?: ""
             }
 //
 //            temp.forEach { (key, value) ->
@@ -102,7 +109,7 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
         })
 
         viewModel.newFoodLiveData.observe(viewLifecycleOwner, {
-            if (it.nombre.isNotEmpty()) {
+            if (it.name.isNotEmpty()) {
                 foodList.add(it)
                 FirestoreHelper().addFood(it)
 //                rvComidas.adapter?.notifyItemChanged(foodList.size - 1)
@@ -111,7 +118,7 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
 
 
         rvComidas.setBaseAdapter(foodList, R.layout.item_food) {
-            itemView.tvFoodName.text = it.nombre
+            itemView.tvFoodName.text = it.name
             itemView.tvFoodName.tag = itemView.tvFoodName.text
             itemView.tvFoodName.setOnLongClickListener(this@PlannerFragment)
         }
@@ -124,15 +131,15 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
     }
 
     private fun savePlanning() {
-        tableItems.forEachIndexed { index, view ->
-            val key = "${index}_"
-            val tempFood = Comida((view as TextView).text.toString())
-            if ( (!planning.foodList.containsKey(key) || planning.foodList[key] != tempFood)
-            ) {
-                planning.foodList[key] = tempFood
-                FirestoreHelper().addPlanning(planning)
-            }
-        }
+//        tableItems.forEachIndexed { index, view ->
+//            val key = "${index}_"
+//            val tempFood = Food(name=(view as TextView).text.toString())
+//            if ( (!planning.foodList.containsKey(key) || planning.foodList[key] != tempFood)
+//            ) {
+//                planning.foodList[key] = tempFood
+//                FirestoreHelper().addPlanning(planning)
+//            }
+//        }
     }
 
     override fun onDrag(v: View?, event: DragEvent): Boolean {

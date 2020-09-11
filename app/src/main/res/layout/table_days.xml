@@ -54,8 +54,9 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
-            android:tag="item11"/>
+            android:fontFamily="@font/poppins_light"
+            android:tag="item11"
+            android:text="Holaa" />
 
         <TextView
             android:id="@+id/item12"
@@ -63,7 +64,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item12" />
     </TableRow>
 
@@ -86,7 +87,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item21" />
 
         <TextView
@@ -95,7 +96,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item22" />
     </TableRow>
 
@@ -118,7 +119,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item31" />
 
         <TextView
@@ -127,7 +128,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item32" />
     </TableRow>
 
@@ -150,7 +151,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item41" />
 
         <TextView
@@ -159,7 +160,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item42" />
     </TableRow>
 
@@ -182,7 +183,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item51" />
 
         <TextView
@@ -191,7 +192,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item52" />
     </TableRow>
 
@@ -214,7 +215,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item61" />
 
         <TextView
@@ -223,7 +224,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item62" />
     </TableRow>
 
@@ -246,7 +247,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/poppins_light"
             android:tag="item71" />
 
         <TextView
@@ -255,6 +256,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
             android:tag="item72" />
     </TableRow>
 
