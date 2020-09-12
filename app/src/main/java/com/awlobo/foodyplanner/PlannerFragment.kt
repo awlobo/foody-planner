@@ -13,15 +13,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.awlobo.foodyplanner.core.FirestoreHelper
-import com.awlobo.foodyplanner.domain.Planning
+import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.awlobo.foodyplanner.core.setBaseAdapter
-import com.awlobo.foodyplanner.domain.Food
+import com.awlobo.foodyplanner.data.domain.food.Food
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.item_food.view.*
 import kotlinx.android.synthetic.main.planner_fragment.*
+import java.util.*
 import kotlin.math.roundToInt
 
 
@@ -70,7 +70,7 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
             mScrollDistance = scrollY
         }
 
-        viewModel.foodList?.observe(viewLifecycleOwner,{
+        viewModel.getFoodList()?.observe(viewLifecycleOwner,{
             foodList.clear()
             foodList.addAll(it)
             rvComidas.adapter?.notifyDataSetChanged()
@@ -106,14 +106,6 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
 //                if( (tableItems[k] as TextView).text != value.nombre){
 //                (tableItems[k] as TextView).text = value.nombre}
 //            }
-        })
-
-        viewModel.newFoodLiveData.observe(viewLifecycleOwner, {
-            if (it.name.isNotEmpty()) {
-                foodList.add(it)
-                FirestoreHelper().addFood(it)
-//                rvComidas.adapter?.notifyItemChanged(foodList.size - 1)
-            }
         })
 
 

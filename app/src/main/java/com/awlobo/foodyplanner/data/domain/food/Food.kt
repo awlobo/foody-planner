@@ -1,13 +1,12 @@
-package com.awlobo.foodyplanner.domain
+package com.awlobo.foodyplanner.data.domain.food
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = Food.TABLE_NAME)
 data class Food(
     val name: String = "",
-    @PrimaryKey(autoGenerate = true) val foodId: Int = 0
+    @PrimaryKey(autoGenerate = true) var foodId: Long = 0
 ) {
     companion object {
         const val TABLE_NAME = "foods"

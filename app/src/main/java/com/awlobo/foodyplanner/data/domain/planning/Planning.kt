@@ -1,13 +1,11 @@
-package com.awlobo.foodyplanner.domain
+package com.awlobo.foodyplanner.data.domain.planning
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = Planning.TABLE_NAME)
 data class Planning(
-    @PrimaryKey(autoGenerate = true) val planningId: Int = 0,
+    @PrimaryKey(autoGenerate = true) val planningId: Long = 0,
     val name: String = "plan_$planningId",
 ) {
     companion object {
