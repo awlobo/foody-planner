@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3ed768b8de615dbe3ee07fd1823e2e43",
+    "identityHash": "192b06fb60fe6bd03774b0a8077b53e2",
     "entities": [
       {
         "tableName": "foods",
@@ -58,7 +58,7 @@
       },
       {
         "tableName": "PlanningFoodCrossRef",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`planningId` INTEGER NOT NULL, `foodId` INTEGER NOT NULL, PRIMARY KEY(`planningId`, `foodId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`planningId` INTEGER NOT NULL, `foodId` INTEGER NOT NULL, `pos` INTEGER NOT NULL, PRIMARY KEY(`planningId`, `foodId`))",
         "fields": [
           {
             "fieldPath": "planningId",
@@ -69,6 +69,12 @@
           {
             "fieldPath": "foodId",
             "columnName": "foodId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pos",
+            "columnName": "pos",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -87,7 +93,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3ed768b8de615dbe3ee07fd1823e2e43')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '192b06fb60fe6bd03774b0a8077b53e2')"
     ]
   }
 }

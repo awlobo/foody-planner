@@ -8,13 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodRepository
 import com.awlobo.foodyplanner.data.domain.planning.PlaningRepository
-import com.awlobo.foodyplanner.data.domain.planning.PlanningWithFoods
+import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRefDao
+import com.awlobo.foodyplanner.data.domain.planning.PlanningWithFoodsPrueba
 import kotlinx.coroutines.launch
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val foodRepository = FoodRepository(application)
     private val planningRepository = PlaningRepository(application)
+    private val planningDao: PlanningFoodCrossRefDao? =
+        com.awlobo.foodyplanner.data.AppDatabase.getInstance(application)?.planningFoodCrossRefDao()
 
     /*------------------------- FOOD -------------------------*/
     fun getFoodList(): LiveData<List<Food>>? {
@@ -36,8 +39,12 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     /*--------------------- PLANNING -------------------------*/
 
-    fun getPlanningList(): LiveData<List<PlanningWithFoods>>? {
-        return planningRepository.getAllPlannings()
+    /*   fun getPlanningList(): LiveData<List<PlanningWithFoods>>? {
+           return planningRepository.getAllPlannings()
+       }*/
+
+    fun getPlanningList(): LiveData<List<PlanningWithFoodsPrueba>>? {
+        return planningDao?.get()
     }
 
 
@@ -45,7 +52,6 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     val deleteData = MutableLiveData(false)
     val newFoodLiveData = MutableLiveData<Food>()
-    val planningLiveData = MutableLiveData<MutableMap<Int, Food>>()
 
 //    fun loadPlanning() {
 //        FirestoreHelper().readPlanning().addSnapshotListener { value, e ->

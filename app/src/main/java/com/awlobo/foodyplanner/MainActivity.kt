@@ -9,17 +9,16 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.lifecycle.LifecycleOwner
 import com.awlobo.foodyplanner.data.domain.food.Food
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 const val SHARED_INTENT_ID = 123
 const val FILE_NAME = "my_planning.png"
@@ -33,11 +32,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-
-        viewModel.getPlanningList()?.observe(this,{
-            var list = it
-            Log.e("ggag","jhjhj")
-        })
 
 //        viewModel.loadFoods()
 //        viewModel.foods
@@ -53,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         builder.setView(viewInflated)
 
         builder.setPositiveButton(android.R.string.ok) { dialog, _ ->
-            viewModel.insertFood(Food(name = input.text.toString()))
+            viewModel.insertFood(Food(name = input.text.toString().capitalize(Locale.getDefault())))
             dialog.dismiss()
         }
 

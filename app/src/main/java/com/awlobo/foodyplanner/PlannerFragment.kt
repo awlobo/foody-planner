@@ -13,9 +13,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
+import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -53,6 +53,7 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setAdapter()
         val tableLayout = table as ViewGroup
         tableItems = getViewsByTag(tableLayout, "item")
         tableItems.forEach {
@@ -60,17 +61,11 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
             (it as TextView).freezesText = true
         }
 
-//        viewModel.foodListLiveData.observe(viewLifecycleOwner, {
-//            foodList.clear()
-//            foodList.addAll(it)
-//            rvComidas.adapter?.notifyDataSetChanged()
-//        })
-
         scroll_view.setOnScrollChangeListener { _, _, scrollY, _, _ ->
             mScrollDistance = scrollY
         }
 
-        viewModel.getFoodList()?.observe(viewLifecycleOwner,{
+        viewModel.getFoodList()?.observe(viewLifecycleOwner, {
             foodList.clear()
             foodList.addAll(it)
             rvComidas.adapter?.notifyDataSetChanged()
@@ -85,30 +80,12 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
             }
         })
 
-//        foodList.addAll(
-//            mutableListOf(
-//                Comida("Tortilla"),
-//                Comida("Macarrones"),
-//                Comida("Pizza"),
-//                Comida("Hamburguesa"),
-//                Comida("Burritos"),
-//                Comida("Salmón")
-//            )
-//        )
-
-        viewModel.planningLiveData.observe(viewLifecycleOwner, {
-            for (i in 0..13) {
-                (tableItems[i] as TextView).text = it[i]?.name ?: ""
-            }
-//
-//            temp.forEach { (key, value) ->
-//                val k = key.split("_")[0].toInt()
-//                if( (tableItems[k] as TextView).text != value.nombre){
-//                (tableItems[k] as TextView).text = value.nombre}
-//            }
+        viewModel.getPlanningList()?.observe(viewLifecycleOwner, {
+            it.forEach { item -> (tableItems[item.pos] as TextView).text = item.name ?: "" }
         })
+    }
 
-
+    private fun setAdapter() {
         rvComidas.setBaseAdapter(foodList, R.layout.item_food) {
             itemView.tvFoodName.text = it.name
             itemView.tvFoodName.tag = itemView.tvFoodName.text
@@ -119,9 +96,9 @@ class PlannerFragment : Fragment(), View.OnDragListener, View.OnLongClickListene
         layoutManager.flexDirection = FlexDirection.ROW
         layoutManager.justifyContent = JustifyContent.CENTER
         rvComidas.layoutManager = layoutManager
-
     }
 
+    // TODO: 13/9/20 SALVAR: POSICION + ID FOOD + ID PLANNING -> CROSS-REF
     private fun savePlanning() {
 //        tableItems.forEachIndexed { index, view ->
 //            val key = "${index}_"
