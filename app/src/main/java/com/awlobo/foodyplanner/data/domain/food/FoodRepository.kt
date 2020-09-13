@@ -12,15 +12,27 @@ class FoodRepository(application: Application) {
         foodDao?.insert(food)
     }
 
-    suspend fun deleteFood(food: Food) {
-        foodDao?.delete(food)
-    }
-
     suspend fun getFoodById(foodId: Long) {
         foodDao?.getById(foodId)
     }
 
+    suspend fun getIdByFood(name: String): Food? {
+        return foodDao?.getByName(name)
+    }
+
     fun getAllFoods(): LiveData<List<Food>>? {
         return foodDao?.getAll()
+    }
+
+    suspend fun deleteFood(food: Food) {
+        foodDao?.delete(food)
+    }
+
+    suspend fun deleteFoodById(id: Int) {
+        foodDao?.deleteById(id)
+    }
+
+    suspend fun deleteAllFoods() {
+        foodDao?.deleteAll()
     }
 }

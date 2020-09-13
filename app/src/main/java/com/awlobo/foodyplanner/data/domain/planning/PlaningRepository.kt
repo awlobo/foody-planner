@@ -3,10 +3,21 @@ package com.awlobo.foodyplanner.data.domain.planning
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.awlobo.foodyplanner.data.AppDatabase
+import com.awlobo.foodyplanner.data.domain.food.FoodTable
 
 class PlaningRepository(application: Application) {
 
     private val planningDao: PlanningDao? = AppDatabase.getInstance(application)?.planningDao()
+    private val crossPlanningDao: PlanningFoodCrossRefDao? =
+        AppDatabase.getInstance(application)?.planningFoodCrossRefDao()
+
+    suspend fun insert(join: PlanningFoodCrossRef) {
+        crossPlanningDao?.insert(join)
+    }
+
+    fun getPlanning(): LiveData<List<FoodTable>>? {
+        return crossPlanningDao?.get()
+    }
 
 //    fun insertPlanning(planning: PlanningWithFoods) {
 //        planningDao?.insert(planning)
@@ -20,9 +31,6 @@ class PlaningRepository(application: Application) {
 //        planningDao?.getById(foodId)
 //    }
 
-    fun getAllPlannings(): LiveData<List<PlanningWithFoods>>? {
-        return planningDao?.getAll()
-    }
 
     /*private class InsertAsyncTask(private val foodDao: FoodDao) :
         AsyncTask<Food, Void, Void>() {

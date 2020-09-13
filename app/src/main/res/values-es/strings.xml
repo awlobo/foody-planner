@@ -3,4 +3,6 @@
     <string name="action_settings">Ajustes</string>
     <string name="add_food">Añadir comidas</string>
     <string name="clear_table">Limpiar tabla</string>
+    <string name="cenas">Cenas</string>
+    <string name="comidas">Comidas</string>
 </resources>

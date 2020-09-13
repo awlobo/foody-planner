@@ -14,7 +14,10 @@
         android:orientation="vertical">
 
         <include
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/table"
+            android:layout_margin="10dp"
             layout="@layout/table_days" />
 
         <!--    <RadioGroup-->
@@ -41,6 +44,19 @@
         <!--            android:fontFamily="sans-serif-smallcaps"-->
         <!--            android:text="hola mis panas v2" />-->
         <!--    </RadioGroup>-->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/delete_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/delete"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Borrar Comida"
+            android:textColor="@color/almost_white"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComidas"

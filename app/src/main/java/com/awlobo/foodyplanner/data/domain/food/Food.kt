@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = Food.TABLE_NAME)
 data class Food(
-    val name: String = "",
+    val name: String,
     @PrimaryKey(autoGenerate = true) var foodId: Long = 0
 ) {
     companion object {

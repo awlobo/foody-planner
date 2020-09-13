@@ -7,17 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodRepository
+import com.awlobo.foodyplanner.data.domain.food.FoodTable
 import com.awlobo.foodyplanner.data.domain.planning.PlaningRepository
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRefDao
-import com.awlobo.foodyplanner.data.domain.planning.PlanningWithFoodsPrueba
+import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRef
 import kotlinx.coroutines.launch
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val foodRepository = FoodRepository(application)
     private val planningRepository = PlaningRepository(application)
-    private val planningDao: PlanningFoodCrossRefDao? =
-        com.awlobo.foodyplanner.data.AppDatabase.getInstance(application)?.planningFoodCrossRefDao()
 
     /*------------------------- FOOD -------------------------*/
     fun getFoodList(): LiveData<List<Food>>? {
@@ -28,42 +26,33 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         foodRepository.insertFood(food)
     }
 
-    fun deleteFood(food: Food) = viewModelScope.launch {
-        foodRepository.deleteFood(food)
+    fun deleteFoodById(id: Int) = viewModelScope.launch {
+        foodRepository.deleteFoodById(id)
     }
 
-    fun getFoodById(food: Food) = viewModelScope.launch {
-        foodRepository.getFoodById(food.foodId)
+    suspend fun getIdByFoodName(name: String): Food? {
+        return foodRepository.getIdByFood(name)
     }
+//
+//    fun getIdByFoodName(name: String) = viewModelScope.launch {
+//        foodRepository.getIdByFood(name) as Food
+//    }
 
 
     /*--------------------- PLANNING -------------------------*/
 
-    /*   fun getPlanningList(): LiveData<List<PlanningWithFoods>>? {
-           return planningRepository.getAllPlannings()
-       }*/
-
-    fun getPlanningList(): LiveData<List<PlanningWithFoodsPrueba>>? {
-        return planningDao?.get()
+    fun getPlanningList(): LiveData<List<FoodTable>>? {
+        return planningRepository.getPlanning()
     }
 
+    fun insertToPlanning(join: PlanningFoodCrossRef) = viewModelScope.launch {
+        planningRepository.insert(join)
+    }
 
     /*----------------------- SHARED -------------------------*/
 
-    val deleteData = MutableLiveData(false)
-    val newFoodLiveData = MutableLiveData<Food>()
+    val addedToPlan = MutableLiveData(false)
+    val deleteAllData = MutableLiveData(false)
+    val deleteButtonState = MutableLiveData(false)
 
-//    fun loadPlanning() {
-//        FirestoreHelper().readPlanning().addSnapshotListener { value, e ->
-//            val planningTemp = value?.toObjects(Planning::class.java)
-//            if (!planningTemp.isNullOrEmpty()) {
-//                val newMap: MutableMap<Int, Food> = mutableMapOf()
-//                planningTemp[0].foodList.forEach { (key, value) ->
-//                    val k = key.split("_")[0].toInt()
-//                    newMap[k] = value
-//                }
-//                planningLiveData.postValue(newMap)
-//            }
-//        }
-//    }
 }

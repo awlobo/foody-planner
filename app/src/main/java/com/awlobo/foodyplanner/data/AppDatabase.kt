@@ -1,7 +1,6 @@
 package com.awlobo.foodyplanner.data
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -37,7 +36,6 @@ abstract class AppDatabase : RoomDatabase() {
                 ).addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        Log.d("AppDatabase", "populating with data...")
                         GlobalScope.launch(Dispatchers.IO) { rePopulateDb(INSTANCE) }
                     }
                 }).build()

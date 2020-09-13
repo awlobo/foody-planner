@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 createFoodDialog();true
             }
             R.id.action_clear_table -> {
-                viewModel.deleteData.value = true; true
+                viewModel.deleteAllData.value = true; true
             }
             else -> super.onOptionsItemSelected(item)
         }

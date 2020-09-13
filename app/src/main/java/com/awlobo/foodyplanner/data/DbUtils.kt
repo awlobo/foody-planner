@@ -4,8 +4,6 @@ import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodDao
 import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.awlobo.foodyplanner.data.domain.planning.PlanningDao
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRef
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRefDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,26 +12,13 @@ suspend fun rePopulateDb(database: AppDatabase?) {
         withContext(Dispatchers.IO) {
             val planningDao: PlanningDao = db.planningDao()
             val foodDao: FoodDao = db.foodDao()
-            val planWithFoods: PlanningFoodCrossRefDao = db.planningFoodCrossRefDao()
 
-//            planningDao.deleteAll()
-//            foodDao.deleteAll()
-
-            val foodOne = Food("Tortilla de patatas")
-            val foodTwo = Food("Macarrones")
-            val foodThree = Food("Puerros")
-            val foodFour = Food("Pasta Fresca")
-
-            val list: List<Food> = listOf(foodOne, foodTwo, foodThree, foodFour)
-//            foodDao.insert(foodOne, foodTwo, foodThree, foodFour)
-
-            val planning = Planning()
-
-            val planningFoods =
-                PlanningFoodCrossRef(planningDao.insert(planning), foodDao.insert(foodOne), 3)
-            planWithFoods.insert(planningFoods)
-//            planningDao.insert(PlanningFoodCrossRef(planning.planningId, foodTwo.foodId))
-
+            foodDao.insert(Food(""))
+            foodDao.insert(Food("Tortilla de patatas"))
+            planningDao.insert(Planning())
+//            val planningFoods =
+//                PlanningFoodCrossRef(planningDao.insert(planning), foodDao.insert(foodOne), 3)
+//            planWithFoods.insert(planningFoods)
         }
     }
 }

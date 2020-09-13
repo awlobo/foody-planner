@@ -8,7 +8,7 @@
         android:orderInCategory="100"
         android:title="@string/share_screenshot"
         android:iconTint="@android:color/black"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/ic_baseline_share_24"
         app:showAsAction="ifRoom" />
 
     <item

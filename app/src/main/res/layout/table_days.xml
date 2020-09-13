@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/almost_white"
     android:stretchColumns="1,2">
 
-    <TableRow>
+    <TableRow android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +20,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            android:text="Comidas"
+            android:text="@string/comidas"
             android:textAllCaps="true"
             android:textSize="24sp" />
 
@@ -28,13 +30,13 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            android:text="Cenas"
+            android:text="@string/cenas"
             android:textAllCaps="true"
             android:textSize="24sp" />
     </TableRow>
 
     <TableRow
-        android:background="#DAE8FC"
+        android:background="@color/almost_white"
         android:minHeight="60dp">
 
         <TextView
@@ -43,7 +45,8 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            android:text="L"
+            android:text="@string/l"
+            style="@style/tableStyle"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
             android:typeface="normal" />
@@ -56,7 +59,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_light"
             android:tag="item11"
-            android:text="Holaa" />
+            tools:text="Holaa" />
 
         <TextView
             android:id="@+id/item12"
@@ -68,9 +71,7 @@
             android:tag="item12" />
     </TableRow>
 
-    <TableRow
-        android:background="#DAE8FC"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,7 +79,8 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            android:text="M"
+            android:text="@string/m"
+            style="@style/tableStyle"
             android:textSize="24sp" />
 
         <TextView
@@ -100,9 +102,7 @@
             android:tag="item22" />
     </TableRow>
 
-    <TableRow
-        android:background="#DAE8FC"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,7 +110,8 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            android:text="X"
+            style="@style/tableStyle"
+            android:text="@string/miercoles"
             android:textSize="24sp" />
 
         <TextView
@@ -132,17 +133,16 @@
             android:tag="item32" />
     </TableRow>
 
-    <TableRow
-        android:background="#DAE8FC"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
+            style="@style/tableStyle"
             android:padding="15dp"
-            android:text="J"
+            android:text="@string/jueves"
             android:textSize="24sp" />
 
         <TextView
@@ -164,9 +164,7 @@
             android:tag="item42" />
     </TableRow>
 
-    <TableRow
-        android:background="#DAE8FC"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -174,7 +172,8 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            android:text="V"
+            style="@style/tableStyle"
+            android:text="@string/viernes"
             android:textSize="24sp" />
 
         <TextView
@@ -196,9 +195,7 @@
             android:tag="item52" />
     </TableRow>
 
-    <TableRow
-        android:background="#DAE8FC"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -206,7 +203,8 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            android:text="S"
+            style="@style/tableStyle"
+            android:text="@string/sabado"
             android:textSize="24sp" />
 
         <TextView
@@ -228,17 +226,16 @@
             android:tag="item62" />
     </TableRow>
 
-    <TableRow
-        android:background="#DAE8FC"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
+            style="@style/tableStyle"
             android:padding="15dp"
-            android:text="D"
+            android:text="@string/domingo"
             android:textSize="24sp" />
 
         <TextView
