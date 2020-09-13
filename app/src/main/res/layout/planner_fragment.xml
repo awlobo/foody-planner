@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/table"
-            android:layout_margin="10dp"
+            android:layout_marginEnd="15dp"
             layout="@layout/table_days" />
 
         <!--    <RadioGroup-->
@@ -53,7 +53,7 @@
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Borrar Comida"
+            android:text="@string/borrar_comida"
             android:textColor="@color/almost_white"
             android:textSize="20sp"
             android:visibility="gone" />

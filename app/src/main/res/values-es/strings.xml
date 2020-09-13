@@ -5,4 +5,18 @@
     <string name="clear_table">Limpiar tabla</string>
     <string name="cenas">Cenas</string>
     <string name="comidas">Comidas</string>
+    <string name="share_screenshot">Compartir planning</string>
+    <string name="food_name">Nombre de comida</string>
+    <string name="messages_header">Mensajes</string>
+    <string name="sync_header">Sincronizar</string>
+    <string name="signature_title">Tu nombre</string>
+    <string name="lunes">L</string>
+    <string name="martes">M</string>
+    <string name="miercoles">X</string>
+    <string name="jueves">J</string>
+    <string name="viernes">V</string>
+    <string name="sabado">S</string>
+    <string name="domingo">D</string>
+    <string name="borrar_comida">Borrar comida</string>
+    <string name="delete_all_settings">Borrar todas las comidas</string>
 </resources>

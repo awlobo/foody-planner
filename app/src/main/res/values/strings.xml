@@ -13,22 +13,18 @@
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="cenas">Cenas</string>
-    <string name="comidas">Comidas</string>
-    <string name="l">L</string>
-    <string name="m">M</string>
-    <string name="miercoles">X</string>
-    <string name="jueves">J</string>
-    <string name="viernes">V</string>
+    <string name="cenas">Dinner</string>
+    <string name="comidas">Lunch</string>
+    <string name="lunes">M</string>
+    <string name="martes">T</string>
+    <string name="miercoles">W</string>
+    <string name="jueves">T</string>
+    <string name="viernes">F</string>
     <string name="sabado">S</string>
-    <string name="domingo">D</string>
+    <string name="domingo">S</string>
+    <string name="borrar_comida">Delete food</string>
+    <string name="delete_all_settings">Delete all foods</string>
 
 </resources>

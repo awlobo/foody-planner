@@ -9,7 +9,7 @@ import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodRepository
 import com.awlobo.foodyplanner.data.domain.food.FoodTable
 import com.awlobo.foodyplanner.data.domain.planning.PlaningRepository
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRef
+import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import kotlinx.coroutines.launch
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {

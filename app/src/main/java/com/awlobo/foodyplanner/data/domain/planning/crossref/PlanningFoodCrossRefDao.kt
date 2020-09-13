@@ -1,4 +1,4 @@
-package com.awlobo.foodyplanner.data.domain.planning
+package com.awlobo.foodyplanner.data.domain.planning.crossref
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

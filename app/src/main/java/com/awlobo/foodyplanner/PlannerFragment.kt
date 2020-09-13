@@ -1,11 +1,8 @@
 package com.awlobo.foodyplanner
 
-import android.content.ClipData
-import android.content.ClipDescription
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.DragShadowBuilder
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -14,8 +11,9 @@ import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodTable
 import com.awlobo.foodyplanner.data.domain.planning.Planning
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRef
+import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import com.awlobo.foodyplanner.listener.DeleteDragListener
+import com.awlobo.foodyplanner.listener.ItemLongClickListener
 import com.awlobo.foodyplanner.listener.TableDragListener
 import com.awlobo.foodyplanner.listener.TableLongClickListener
 import com.google.android.flexbox.FlexDirection
@@ -29,7 +27,7 @@ import java.util.*
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class PlannerFragment : Fragment(), View.OnLongClickListener {
+class PlannerFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
 
@@ -63,23 +61,23 @@ class PlannerFragment : Fragment(), View.OnLongClickListener {
         tableItems = getViewsByTag(tableLayout, "item")
         tableItems.forEach {
             it.setOnDragListener(TableDragListener(mScrollDistance, scroll_view, viewModel))
-            it.setOnLongClickListener(TableLongClickListener())
+            it.setOnLongClickListener(TableLongClickListener(viewModel))
             (it as TextView).freezesText = true
         }
         delete_food.setOnDragListener(DeleteDragListener(requireContext(), viewModel))
         scroll_view.setOnScrollChangeListener { _, _, scrollY, _, _ -> mScrollDistance = scrollY }
 
         viewModel.getFoodList()?.observe(viewLifecycleOwner, { list ->
-            foodList.clear().also { foodList.addAll(list) }
+//            foodList.clear().also { foodList.addAll(list) }
+            foodList.clear().also { foodList.addAll(list.filter { it.foodId != 1L }) }
             rvComidas.adapter?.notifyDataSetChanged()
         })
 
         viewModel.deleteAllData.observe(viewLifecycleOwner, {
             if (it) {
                 viewModel.deleteAllData.value = false
-                tableItems.forEach { view ->
-                    (view as TextView).text = ""
-                }
+                tableItems.forEach { view -> (view as TextView).text = "" }
+                savePlanning()
             }
         })
         viewModel.deleteButtonState.observe(viewLifecycleOwner, {
@@ -97,12 +95,12 @@ class PlannerFragment : Fragment(), View.OnLongClickListener {
     }
 
     private fun saveDatabase() {
-        listIdTemp.forEachIndexed { index, foodId ->
-            viewModel.insertToPlanning(
-                PlanningFoodCrossRef(
-                    1, foodId, index
+        if (listIdTemp.all { it != 0L }) {
+            listIdTemp.forEachIndexed { index, foodId ->
+                viewModel.insertToPlanning(
+                    PlanningFoodCrossRef(1, foodId, index)
                 )
-            )
+            }
         }
     }
 
@@ -110,7 +108,7 @@ class PlannerFragment : Fragment(), View.OnLongClickListener {
         rvComidas.setBaseAdapter(foodList, R.layout.item_food) {
             itemView.tvFoodName.text = it.name
             itemView.tvFoodName.tag = it.foodId
-            itemView.tvFoodName.setOnLongClickListener(this@PlannerFragment)
+            itemView.tvFoodName.setOnLongClickListener(ItemLongClickListener(viewModel))
         }
 
         val layoutManager = FlexboxLayoutManager(context)
@@ -124,34 +122,6 @@ class PlannerFragment : Fragment(), View.OnLongClickListener {
             val text = (view as TextView).text.toString()
             listIdTemp[index] = foodList.find { it.name == text }?.foodId ?: 1
         }
-    }
-
-    override fun onLongClick(v: View): Boolean {
-        // Create a new ClipData.Item from the View object's tag
-        val textView = v as TextView
-        val tvData = "${textView.tag}-${textView.text}"
-        val item = ClipData.Item(tvData as CharSequence)
-//        val item = ClipData.Item(textView.text as CharSequence)
-
-        // Create a new ClipData using the tag as a label, the plain text MIME type, and
-        // the already-created item. This will create a new ClipDescription object within the
-        // ClipData, and set its MIME type entry to "text/plain"
-        val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-        val data = ClipData(v.tag.toString(), mimeTypes, item)
-
-        // Instantiates the drag shadow builder.
-        val dragShadow = DragShadowBuilder(v)
-
-        // Starts the drag
-        v.startDragAndDrop(
-            data // data to be dragged
-            , dragShadow // drag shadow
-            , v // local data about the drag and drop operation
-            , 0 // flags set to 0 because not using currently
-        )
-
-        viewModel.deleteButtonState.value = true
-        return true
     }
 
     private fun getViewsByTag(root: ViewGroup, tag: String): ArrayList<View> {

@@ -9,8 +9,8 @@ import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodDao
 import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.awlobo.foodyplanner.data.domain.planning.PlanningDao
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRef
-import com.awlobo.foodyplanner.data.domain.planning.PlanningFoodCrossRefDao
+import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
+import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRefDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

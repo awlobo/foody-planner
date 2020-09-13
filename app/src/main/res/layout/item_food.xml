@@ -6,5 +6,6 @@
     android:layout_margin="3dp"
     android:background="@drawable/rounded_corner"
     android:padding="13dp"
+    android:textColor="@color/white"
     android:minWidth="45dp" />
 
