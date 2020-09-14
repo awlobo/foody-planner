@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodTable
-import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import com.awlobo.foodyplanner.listener.DeleteDragListener
 import com.awlobo.foodyplanner.listener.ItemLongClickListener
@@ -31,14 +30,13 @@ class PlannerFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
 
-    var foodList = mutableListOf<Food>()
-    var planningList = mutableListOf<FoodTable>()
-    val planning = Planning()
+    private var foodList = mutableListOf<Food>()
+    private var planningList = mutableListOf<FoodTable>()
 
     private val listIdTemp = LongArray(14)
 
     private var mScrollDistance = 0
-    lateinit var tableItems: ArrayList<View>
+    private lateinit var tableItems: ArrayList<View>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +66,6 @@ class PlannerFragment : Fragment() {
         scroll_view.setOnScrollChangeListener { _, _, scrollY, _, _ -> mScrollDistance = scrollY }
 
         viewModel.getFoodList()?.observe(viewLifecycleOwner, { list ->
-//            foodList.clear().also { foodList.addAll(list) }
             foodList.clear().also { foodList.addAll(list.filter { it.foodId != 1L }) }
             rvComidas.adapter?.notifyDataSetChanged()
         })
