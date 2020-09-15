@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.appdistribution'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -18,9 +19,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
             }
         }
 
@@ -32,18 +33,23 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            firebaseAppDistribution {
+//                releaseNotesFile="$projectDir/apprelease/debug/release_note.txt"
+                releaseNotes = "Debug release"
+//                testersFile = "$projectDir/testers.txt"
+                testers = "andrea.lobo93@gmail.com, fatima.lobo.arroyo@gmail.com"
+//                groupsFile="$projectDir/apprelease/debug/firebase_group.txt"
+                //groups ="qa-team, android-testers"
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-
-   /*     annotationProcessorOptions {
-            arguments = [
-                    "room.schemaLocation": "$projectDir/src/main/assets/schemas".toString(),
-                    "room.incremental": "true"
-            ]
-        }*/
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -59,7 +65,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
-    implementation 'com.google.firebase:firebase-firestore:21.5.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
     //  TESTS

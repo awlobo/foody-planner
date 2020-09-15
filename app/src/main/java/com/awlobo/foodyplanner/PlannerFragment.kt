@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
-import com.awlobo.foodyplanner.data.domain.food.FoodTable
+import com.awlobo.foodyplanner.data.domain.food.FoodModel
 import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import com.awlobo.foodyplanner.listener.DeleteDragListener
 import com.awlobo.foodyplanner.listener.ItemLongClickListener
@@ -30,8 +30,8 @@ class PlannerFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
 
-    private var foodList = mutableListOf<Food>()
-    private var planningList = mutableListOf<FoodTable>()
+    private var foodList = mutableListOf<FoodModel>()
+    private var planningList = mutableListOf<Food>()
 
     private val listIdTemp = LongArray(14)
 

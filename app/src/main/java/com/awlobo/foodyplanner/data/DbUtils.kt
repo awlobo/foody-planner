@@ -1,7 +1,7 @@
 package com.awlobo.foodyplanner.data
 
-import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodDao
+import com.awlobo.foodyplanner.data.domain.food.FoodModel
 import com.awlobo.foodyplanner.data.domain.planning.Planning
 import com.awlobo.foodyplanner.data.domain.planning.PlanningDao
 import kotlinx.coroutines.Dispatchers
@@ -13,8 +13,8 @@ suspend fun rePopulateDb(database: AppDatabase?) {
             val planningDao: PlanningDao = db.planningDao()
             val foodDao: FoodDao = db.foodDao()
 
-            foodDao.insert(Food(""))
-            foodDao.insert(Food("Tortilla de patatas"))
+            foodDao.insert(FoodModel(""))
+            foodDao.insert(FoodModel("Tortilla de patatas"))
             planningDao.insert(Planning())
 //            val planningFoods =
 //                PlanningFoodCrossRef(planningDao.insert(planning), foodDao.insert(foodOne), 3)
