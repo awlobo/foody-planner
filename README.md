@@ -20,9 +20,8 @@
 
 ## :camera: Screenshots <a name = "screenshots"></a>
 
-<div align="left">
- <!-- <img src="/website/public/assets/home1.png" width="25%"/> -->
-to be added
+<div align="center">
+<img src="https://i.imgur.com/hV5gfMv.png" width="25%"/>
 </div>
 
 ## :gear: Functions  <a name = "functions"></a>
