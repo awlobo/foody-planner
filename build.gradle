@@ -26,6 +26,6 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task buildPublish(type: GradleBuild) {
+task aaBuildPublish(type: GradleBuild) {
     tasks = ['assembleDebug', 'appDistributionUploadDebug']
 }
