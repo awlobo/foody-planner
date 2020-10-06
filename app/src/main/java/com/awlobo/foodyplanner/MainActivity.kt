@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> true
             R.id.action_screenshot -> {
-                ScreenshotHelper(this).makeScreenshot()
-                true
+                ScreenshotHelper(this).makeScreenshot(); true
             }
             R.id.action_add_food -> {
                 createFoodDialog();true

@@ -55,4 +55,14 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     val deleteAllData = MutableLiveData(false)
     val deleteButtonState = MutableLiveData(false)
 
+    fun saveDatabase(listIdTemp: LongArray) {
+        if (listIdTemp.all { it != 0L }) {
+            listIdTemp.forEachIndexed { index, foodId ->
+                insertToPlanning(
+                    PlanningFoodCrossRef(1, foodId, index)
+                )
+            }
+        }
+    }
+
 }

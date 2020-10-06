@@ -11,7 +11,6 @@ import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodTable
 import com.awlobo.foodyplanner.data.domain.planning.Planning
-import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import com.awlobo.foodyplanner.listener.DeleteDragListener
 import com.awlobo.foodyplanner.listener.ItemLongClickListener
 import com.awlobo.foodyplanner.listener.TableDragListener
@@ -48,7 +47,7 @@ class PlannerFragment : Fragment() {
     }
 
     override fun onPause() {
-        saveDatabase()
+        viewModel.saveDatabase(listIdTemp)
         super.onPause()
     }
 
@@ -68,7 +67,7 @@ class PlannerFragment : Fragment() {
         scroll_view.setOnScrollChangeListener { _, _, scrollY, _, _ -> mScrollDistance = scrollY }
 
         viewModel.getFoodList()?.observe(viewLifecycleOwner, { list ->
-//            foodList.clear().also { foodList.addAll(list) }
+            viewModel.saveDatabase(listIdTemp)
             foodList.clear().also { foodList.addAll(list.filter { it.foodId != 1L }) }
             rvComidas.adapter?.notifyDataSetChanged()
         })
@@ -78,6 +77,7 @@ class PlannerFragment : Fragment() {
                 viewModel.deleteAllData.value = false
                 tableItems.forEach { view -> (view as TextView).text = "" }
                 savePlanning()
+                viewModel.saveDatabase(listIdTemp)
             }
         })
         viewModel.deleteButtonState.observe(viewLifecycleOwner, {
@@ -94,16 +94,16 @@ class PlannerFragment : Fragment() {
         })
     }
 
-    private fun saveDatabase() {
-        if (listIdTemp.all { it != 0L }) {
-            listIdTemp.forEachIndexed { index, foodId ->
-                viewModel.insertToPlanning(
-                    PlanningFoodCrossRef(1, foodId, index)
-                )
-            }
-        }
-    }
-
+    /*   private fun saveDatabase() {
+           if (listIdTemp.all { it != 0L }) {
+               listIdTemp.forEachIndexed { index, foodId ->
+                   viewModel.insertToPlanning(
+                       PlanningFoodCrossRef(1, foodId, index)
+                   )
+               }
+           }
+       }
+   */
     private fun setAdapter() {
         rvComidas.setBaseAdapter(foodList, R.layout.item_food) {
             itemView.tvFoodName.text = it.name
