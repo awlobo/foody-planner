@@ -19,6 +19,8 @@
     <style name="itemsTable" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">22sp</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="background">@color/almost_white</item>
     </style>
 
     <style name="tableStyle" parent="Widget.AppCompat.TextView">

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/almost_white"
     android:stretchColumns="1,2">
 
     <TableRow android:background="@color/white">
@@ -35,18 +34,16 @@
             android:textSize="24sp" />
     </TableRow>
 
-    <TableRow
-        android:background="@color/almost_white"
-        android:minHeight="60dp">
+    <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
             android:text="@string/lunes"
-            style="@style/tableStyle"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
             android:typeface="normal" />
@@ -57,6 +54,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item11"
             tools:text="Holaa" />
@@ -67,6 +65,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item12" />
     </TableRow>
@@ -74,13 +73,13 @@
     <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
             android:text="@string/martes"
-            style="@style/tableStyle"
             android:textSize="24sp" />
 
         <TextView
@@ -89,6 +88,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item21" />
 
@@ -98,6 +98,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item22" />
     </TableRow>
@@ -105,12 +106,12 @@
     <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            style="@style/tableStyle"
             android:text="@string/miercoles"
             android:textSize="24sp" />
 
@@ -120,6 +121,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item31" />
 
@@ -129,6 +131,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item32" />
     </TableRow>
@@ -136,11 +139,11 @@
     <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            style="@style/tableStyle"
             android:padding="15dp"
             android:text="@string/jueves"
             android:textSize="24sp" />
@@ -151,6 +154,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item41" />
 
@@ -160,6 +164,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item42" />
     </TableRow>
@@ -167,12 +172,12 @@
     <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            style="@style/tableStyle"
             android:text="@string/viernes"
             android:textSize="24sp" />
 
@@ -182,6 +187,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item51" />
 
@@ -191,6 +197,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item52" />
     </TableRow>
@@ -198,12 +205,12 @@
     <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:padding="15dp"
-            style="@style/tableStyle"
             android:text="@string/sabado"
             android:textSize="24sp" />
 
@@ -213,6 +220,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item61" />
 
@@ -222,6 +230,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item62" />
     </TableRow>
@@ -229,11 +238,11 @@
     <TableRow android:minHeight="60dp">
 
         <TextView
+            style="@style/tableStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            style="@style/tableStyle"
             android:padding="15dp"
             android:text="@string/domingo"
             android:textSize="24sp" />
@@ -244,6 +253,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item71" />
 
@@ -253,6 +263,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/almost_white"
             android:fontFamily="@font/poppins_light"
             android:tag="item72" />
     </TableRow>

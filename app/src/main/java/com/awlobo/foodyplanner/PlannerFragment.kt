@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
-import com.awlobo.foodyplanner.data.domain.food.FoodTable
-import com.awlobo.foodyplanner.data.domain.planning.Planning
-import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
+import com.awlobo.foodyplanner.data.domain.food.FoodModel
 import com.awlobo.foodyplanner.listener.DeleteDragListener
 import com.awlobo.foodyplanner.listener.ItemLongClickListener
 import com.awlobo.foodyplanner.listener.TableDragListener
