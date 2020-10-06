@@ -7,22 +7,22 @@ import androidx.room.*
 interface FoodDao {
 
     @Query("SELECT * FROM foods ORDER BY name")
-    fun getAll(): LiveData<List<Food>>
+    fun getAll(): LiveData<List<FoodModel>>
 
     @Query("SELECT * FROM foods WHERE foodId =:fid")
-    suspend fun getById(fid: Long): Food
+    suspend fun getById(fid: Long): FoodModel
 
     @Query("SELECT * FROM foods WHERE name =:fName")
-    suspend fun getByName(fName: String): Food
+    suspend fun getByName(fName: String): FoodModel
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(food: Food): Long
+    suspend fun insert(food: FoodModel): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(vararg foods: Food)
+    suspend fun insertAll(vararg foods: FoodModel)
 
     @Delete
-    suspend fun delete(food: Food)
+    suspend fun delete(food: FoodModel)
 
     @Query("DELETE FROM foods WHERE foodId = :id")
     suspend fun deleteById(id: Int)

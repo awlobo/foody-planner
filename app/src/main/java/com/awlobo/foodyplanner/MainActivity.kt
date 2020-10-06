@@ -11,7 +11,7 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.awlobo.foodyplanner.core.ScreenshotHelper
-import com.awlobo.foodyplanner.data.domain.food.Food
+import com.awlobo.foodyplanner.data.domain.food.FoodModel
 import java.io.File
 import java.util.*
 
@@ -37,7 +37,11 @@ class MainActivity : AppCompatActivity() {
         builder.setView(viewInflated)
 
         builder.setPositiveButton(android.R.string.ok) { dialog, _ ->
-            viewModel.insertFood(Food(name = input.text.toString().capitalize(Locale.getDefault())))
+            viewModel.insertFood(
+                FoodModel(
+                    name = input.text.toString().capitalize(Locale.getDefault())
+                )
+            )
             dialog.dismiss()
         }
 

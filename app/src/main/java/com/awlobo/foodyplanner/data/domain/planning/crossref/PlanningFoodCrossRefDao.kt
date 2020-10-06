@@ -2,7 +2,7 @@ package com.awlobo.foodyplanner.data.domain.planning.crossref
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.awlobo.foodyplanner.data.domain.food.FoodTable
+import com.awlobo.foodyplanner.data.domain.food.Food
 
 @Dao
 interface PlanningFoodCrossRefDao {
@@ -20,5 +20,5 @@ interface PlanningFoodCrossRefDao {
 
     @Transaction
     @Query("SELECT foods.name, pos, plannings.planningId FROM plannings, foods, PlanningFoodCrossRef WHERE plannings.planningId = 1 AND PlanningFoodCrossRef.foodId = foods.foodId AND PlanningFoodCrossRef.planningId = plannings.planningId")
-    fun get(): LiveData<List<FoodTable>>
+    fun get(): LiveData<List<Food>>
 }

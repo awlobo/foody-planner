@@ -3,7 +3,7 @@ package com.awlobo.foodyplanner.data.domain.planning
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.awlobo.foodyplanner.data.AppDatabase
-import com.awlobo.foodyplanner.data.domain.food.FoodTable
+import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRefDao
 
@@ -17,7 +17,7 @@ class PlaningRepository(application: Application) {
         crossPlanningDao?.insert(join)
     }
 
-    fun getPlanning(): LiveData<List<FoodTable>>? {
+    fun getPlanning(): LiveData<List<Food>>? {
         return crossPlanningDao?.get()
     }
 

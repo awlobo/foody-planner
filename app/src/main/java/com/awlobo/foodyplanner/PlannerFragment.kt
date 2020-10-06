@@ -11,6 +11,7 @@ import com.awlobo.foodyplanner.core.setBaseAdapter
 import com.awlobo.foodyplanner.data.domain.food.Food
 import com.awlobo.foodyplanner.data.domain.food.FoodTable
 import com.awlobo.foodyplanner.data.domain.planning.Planning
+import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import com.awlobo.foodyplanner.listener.DeleteDragListener
 import com.awlobo.foodyplanner.listener.ItemLongClickListener
 import com.awlobo.foodyplanner.listener.TableDragListener
@@ -30,14 +31,13 @@ class PlannerFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
 
-    var foodList = mutableListOf<Food>()
-    var planningList = mutableListOf<FoodTable>()
-    val planning = Planning()
+    private var foodList = mutableListOf<FoodModel>()
+    private var planningList = mutableListOf<Food>()
 
     private val listIdTemp = LongArray(14)
 
     private var mScrollDistance = 0
-    lateinit var tableItems: ArrayList<View>
+    private lateinit var tableItems: ArrayList<View>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +76,6 @@ class PlannerFragment : Fragment() {
             if (it) {
                 viewModel.deleteAllData.value = false
                 tableItems.forEach { view -> (view as TextView).text = "" }
-                savePlanning()
                 viewModel.saveDatabase(listIdTemp)
             }
         })

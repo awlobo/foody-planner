@@ -11,8 +11,8 @@ class ItemLongClickListener(private val viewModel: SharedViewModel) : View.OnLon
         val textView = v as TextView
         val tvData = "${textView.tag}-${textView.text}"
         val item = ClipData.Item(tvData as CharSequence)
-//        val item = ClipData.Item(textView.text as CharSequence)
 
+        // val item = ClipData.Item(textView.text as CharSequence)
         // Create a new ClipData using the tag as a label, the plain text MIME type, and
         // the already-created item. This will create a new ClipDescription object within the
         // ClipData, and set its MIME type entry to "text/plain"

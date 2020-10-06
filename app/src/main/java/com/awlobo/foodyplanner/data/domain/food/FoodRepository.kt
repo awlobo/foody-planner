@@ -8,7 +8,7 @@ class FoodRepository(application: Application) {
 
     private val foodDao: FoodDao? = AppDatabase.getInstance(application)?.foodDao()
 
-    suspend fun insertFood(food: Food) {
+    suspend fun insertFood(food: FoodModel) {
         foodDao?.insert(food)
     }
 
@@ -16,15 +16,15 @@ class FoodRepository(application: Application) {
         foodDao?.getById(foodId)
     }
 
-    suspend fun getIdByFood(name: String): Food? {
+    suspend fun getIdByFood(name: String): FoodModel? {
         return foodDao?.getByName(name)
     }
 
-    fun getAllFoods(): LiveData<List<Food>>? {
+    fun getAllFoods(): LiveData<List<FoodModel>>? {
         return foodDao?.getAll()
     }
 
-    suspend fun deleteFood(food: Food) {
+    suspend fun deleteFood(food: FoodModel) {
         foodDao?.delete(food)
     }
 

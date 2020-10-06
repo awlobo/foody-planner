@@ -43,21 +43,15 @@ class DeleteDragListener(context: Context, viewModel: SharedViewModel) :
                 val vw = event.localState as TextView
                 val owner = vw.parent as ViewGroup
                 owner.removeView(vw)
-                val container = v as TextView
                 mViewModel.deleteFoodById(dragData.split("-")[0].toInt())
                 mViewModel.deleteButtonState.value = false
-//                vw.visibility = View.GONE //finally set Visibility to VISIBLE
-                // Returns true. DragEvent.getResult() will return true.
                 return true
             }
             DragEvent.ACTION_DRAG_ENDED -> {
                 v!!.setBackgroundColor(Color.TRANSPARENT)
                 v.invalidate()
-                // if (!event.result)
                 mViewModel.deleteButtonState.value = false
                 return true
-            }
-            else -> {
             }
         }
         return false

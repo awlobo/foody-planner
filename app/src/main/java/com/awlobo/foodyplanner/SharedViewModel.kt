@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.awlobo.foodyplanner.data.domain.food.Food
+import com.awlobo.foodyplanner.data.domain.food.FoodModel
 import com.awlobo.foodyplanner.data.domain.food.FoodRepository
-import com.awlobo.foodyplanner.data.domain.food.FoodTable
 import com.awlobo.foodyplanner.data.domain.planning.PlaningRepository
 import com.awlobo.foodyplanner.data.domain.planning.crossref.PlanningFoodCrossRef
 import kotlinx.coroutines.launch
@@ -18,11 +18,11 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     private val planningRepository = PlaningRepository(application)
 
     /*------------------------- FOOD -------------------------*/
-    fun getFoodList(): LiveData<List<Food>>? {
+    fun getFoodList(): LiveData<List<FoodModel>>? {
         return foodRepository.getAllFoods()
     }
 
-    fun insertFood(food: Food) = viewModelScope.launch {
+    fun insertFood(food: FoodModel) = viewModelScope.launch {
         foodRepository.insertFood(food)
     }
 
@@ -30,7 +30,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         foodRepository.deleteFoodById(id)
     }
 
-    suspend fun getIdByFoodName(name: String): Food? {
+    suspend fun getIdByFoodName(name: String): FoodModel? {
         return foodRepository.getIdByFood(name)
     }
 //
@@ -41,7 +41,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     /*--------------------- PLANNING -------------------------*/
 
-    fun getPlanningList(): LiveData<List<FoodTable>>? {
+    fun getPlanningList(): LiveData<List<Food>>? {
         return planningRepository.getPlanning()
     }
 
