@@ -18,6 +18,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     private val planningRepository = PlaningRepository(application)
 
     /*------------------------- FOOD -------------------------*/
+
     fun getFoodList(): LiveData<List<FoodModel>>? {
         return foodRepository.getAllFoods()
     }
